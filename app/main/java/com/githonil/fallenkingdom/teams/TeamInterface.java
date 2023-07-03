@@ -26,6 +26,27 @@ public interface TeamInterface extends Iterable<UUID> {
 
 
     /**
+     * This method returns the team's leader.
+     * 
+     * @return Return the team's leader.
+     */
+    UUID getLeader();
+
+
+
+    /**
+     * This method switch the team's leader.
+     * <p>
+     * The new leader must be in the team.
+     * 
+     * @param newLeader The new leader's UUID of the team.
+     * @return Return true if the switch works, else false.
+     */
+    void switchLeader(UUID newLeader);
+
+
+
+    /**
      * This method adds a teammate to the team.
      * 
      * @param teammate The teammate's UUID of the team.
@@ -40,5 +61,14 @@ public interface TeamInterface extends Iterable<UUID> {
      * @param teammate The teammate's UUID of the team.
      */
     void removeTeammate(UUID teammate);
+
+
+
+    /**
+     * This method checks if a teammate is in the team.
+     * 
+     * @param teammate The teammate's UUID.
+     */
+    boolean containTeammate(UUID teammate);
 
 }

@@ -25,6 +25,13 @@ public class Team implements TeamInterface {
 
 
     /**
+     * This attribute represents the leader's UUID of the team.
+     */
+    private UUID leader;
+
+
+
+    /**
      * This attribute represents the team's teammates list.
      */
     private Set<UUID> teammates;
@@ -36,13 +43,14 @@ public class Team implements TeamInterface {
      * 
      * @param name The team's name.
      * @param color The team's color.
-     * @param teammate The teammate's UUID from the team.
+     * @param leader The leader's UUID from the team.
      */
-    public Team(String name, String color, UUID teammate) {
+    public Team(String name, String color, UUID leader) {
         this.name = name;
         this.color = color;
+        this.leader = leader;
         this.teammates = new Set<>();
-        this.teammates.add(teammate);
+        this.teammates.add(leader);
     }
 
 
@@ -72,6 +80,36 @@ public class Team implements TeamInterface {
 
 
     /**
+     * This method returns the team's leader.
+     * 
+     * @return Return the team's leader.
+     */
+    @Override
+    UUID getLeader() {
+        return leader;
+    }
+
+
+
+    /**
+     * This method switch the team's leader.
+     * <p>
+     * The new leader must be in the team.
+     * 
+     * @param newLeader The new leader's UUID of the team.
+     * @return Return true if the switch works, else false.
+     */
+    @Override
+    boolean switchLeader(UUID newLeader) {
+        if (!teammates.contains(newLeader)) return false;
+        leader = newLeader;
+
+        return true;
+    }
+
+
+
+    /**
      * This method adds a teammate to the team.
      * 
      * @param teammate The teammate's UUID of the team.
@@ -91,6 +129,18 @@ public class Team implements TeamInterface {
     @Override
     void removeTeammate(UUID teammate) {
         teammates.remove(teammate);
+    }
+
+
+
+    /**
+     * This method checks if a teammate is in the team.
+     * 
+     * @param teammate The teammate's UUID.
+     */
+    @Override
+    boolean containTeammate(UUID teammate) {
+        return teammates.contains(teammate);
     }
 
 
@@ -140,7 +190,7 @@ public class Team implements TeamInterface {
         if (!(o instanceof Team)) return false;
 
         Team oTeam = (Team) o;
-        return o.name.equals(this.name) && o.color.equals(this.color) && o.teammates.equals(this.teammates);
+        return oTeam.name.equals(this.name) && oTeam.color.equals(this.color) && oTeam.teammates.equals(this.teammates);
     }
 
 
