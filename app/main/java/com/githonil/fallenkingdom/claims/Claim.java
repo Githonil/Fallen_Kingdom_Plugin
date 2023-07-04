@@ -48,7 +48,7 @@ public class Claim implements ClaimInterface {
      * @return Return the claim's coordinate.
      */
     @Override
-    int[] getCoordinate() {
+    public int[] getCoordinate() {
         return coordinate.copy();
     }
 
@@ -61,7 +61,7 @@ public class Claim implements ClaimInterface {
      * @return Return true if the player is authorized, else false.
      */
     @Override
-    boolean checkPlayer(UUID player) {
+    public boolean checkPlayer(UUID player) {
         return team.containTeammate(player);
     }
 
@@ -73,7 +73,7 @@ public class Claim implements ClaimInterface {
      * @return Return the claim converts to string.
      */
     @Override
-    public toString() {
+    public String toString() {
         return "Coordinate : [" + coordinate[0] + ", " + coordinate[1] + ", " + coordinate[2] + "]\n" + team;
     }
 
@@ -97,12 +97,12 @@ public class Claim implements ClaimInterface {
 
 
     /**
-     * This method returns the claim's hashcode.
+     * This method returns the claim's hash code.
      * 
-     * @return Return the claim's hashcode.
+     * @return Return the claim's hash code.
      */
     @Override
-    public int hashcode() {
+    public int hashCode() {
         return Objects.hash(this.team, this.coordinate);
     }
 

@@ -85,7 +85,7 @@ public class Team implements TeamInterface {
      * @return Return the team's leader.
      */
     @Override
-    UUID getLeader() {
+    public UUID getLeader() {
         return leader;
     }
 
@@ -100,7 +100,7 @@ public class Team implements TeamInterface {
      * @return Return true if the switch works, else false.
      */
     @Override
-    boolean switchLeader(UUID newLeader) {
+    public boolean switchLeader(UUID newLeader) {
         if (!teammates.contains(newLeader)) return false;
         leader = newLeader;
 
@@ -115,7 +115,7 @@ public class Team implements TeamInterface {
      * @param teammate The teammate's UUID of the team.
      */
     @Override
-    void addTeammate(UUID teammate) {
+    public void addTeammate(UUID teammate) {
         teammates.add(teammate);
     }
 
@@ -127,7 +127,7 @@ public class Team implements TeamInterface {
      * @param teammate The teammate's UUID of the team.
      */
     @Override
-    void removeTeammate(UUID teammate) {
+    public void removeTeammate(UUID teammate) {
         teammates.remove(teammate);
     }
 
@@ -139,7 +139,7 @@ public class Team implements TeamInterface {
      * @param teammate The teammate's UUID.
      */
     @Override
-    boolean containTeammate(UUID teammate) {
+    public boolean containTeammate(UUID teammate) {
         return teammates.contains(teammate);
     }
 
@@ -171,7 +171,7 @@ public class Team implements TeamInterface {
             str.append(UUID + ", ");
         }
         str.delete(str.length - 2, str.length);
-        str.append("]\n");
+        str.append(']');
 
         return str.toString();
     }
@@ -196,12 +196,12 @@ public class Team implements TeamInterface {
 
 
     /**
-     * This method returns the team's hashcode.
+     * This method returns the team's hash code.
      * 
-     * @return Return the team's hashcode.
+     * @return Return the team's hash code.
      */
     @Override
-    public int hashcode() {
+    public int hashCode() {
         return Objects.hash(this.name, this.color, this.teammates);
     }
 
