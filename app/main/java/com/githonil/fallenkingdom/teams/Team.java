@@ -1,6 +1,6 @@
 package com.githonil.fallenkingdom.teams;
 
-import java.util.Set;
+import java.util.HashSet;
 import java.util.UUID;
 import java.util.Objects;
 import java.util.Iterator;
@@ -34,7 +34,7 @@ public class Team implements TeamInterface {
     /**
      * This attribute represents the team's teammates list.
      */
-    private Set<UUID> teammates;
+    private HashSet<UUID> teammates;
 
 
 
@@ -49,7 +49,7 @@ public class Team implements TeamInterface {
         this.name = name;
         this.color = color;
         this.leader = leader;
-        this.teammates = new Set<>();
+        this.teammates = new HashSet<>();
         this.teammates.add(leader);
     }
 
@@ -151,7 +151,7 @@ public class Team implements TeamInterface {
      * @return Return an iterator of the team's teammates.
      */
     @Override
-    public Interator<UUID> iterator() {
+    public Iterator<UUID> iterator() {
         return teammates.iterator();
     }
 
@@ -167,10 +167,10 @@ public class Team implements TeamInterface {
         StringBuilder str = new StringBuilder(32);
         str.append("Name : " + name + "\nColor : " + color + "\nPlayers's UUID : [");
 
-        for(UUID player : teammates) {
-            str.append(UUID + ", ");
+        for(UUID teammate : teammates) {
+            str.append(teammate + ", ");
         }
-        str.delete(str.length - 2, str.length);
+        str.delete(str.length() - 2, str.length());
         str.append(']');
 
         return str.toString();

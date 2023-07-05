@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * This class represents a Fallen Kingdom's timer.
  */
-public class FallenKingdomTimer extends TimerTask implements FallenkingdomTimerInteface {
+public class FallenKingdomTimer extends TimerTask implements FallenKingdomTimerInterface {
     
     /**
      * This attribute represents the timer's seconds.
@@ -106,8 +106,7 @@ public class FallenKingdomTimer extends TimerTask implements FallenkingdomTimerI
         seconds = 0;
         minutes = 0;
         days = 0;
-        running = 0;
-        timerCore.cancel();
+        running = false;
     }
 
 
@@ -183,7 +182,7 @@ public class FallenKingdomTimer extends TimerTask implements FallenkingdomTimerI
      * @return Return the timer's hash code.
      */
     public int hashCode() {
-        Objects.hash(seconds, minutes, days);
+        return Objects.hash(seconds, minutes, days);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.githonil.fallenkingdom;
+package com.githonil.fallenkingdom.teams;
 
 import java.util.UUID;
 
@@ -42,7 +42,7 @@ public interface TeamInterface extends Iterable<UUID> {
      * @param newLeader The new leader's UUID of the team.
      * @return Return true if the switch works, else false.
      */
-    void switchLeader(UUID newLeader);
+    boolean switchLeader(UUID newLeader);
 
 
 
@@ -68,6 +68,7 @@ public interface TeamInterface extends Iterable<UUID> {
      * This method checks if a teammate is in the team.
      * 
      * @param teammate The teammate's UUID.
+     * @return Return true if the teammate is in the team, else false.
      */
     boolean containTeammate(UUID teammate);
 

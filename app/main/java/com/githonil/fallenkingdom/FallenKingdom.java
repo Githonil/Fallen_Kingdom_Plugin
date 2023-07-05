@@ -1,16 +1,16 @@
-package com.githonil.fallenkingdom;
+/*package com.githonil.fallenkingdom;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * This class is the main class of the plugin.
  */
-public class FallenKingdom extends JavaPlugin {
+/*public class FallenKingdom extends JavaPlugin {
 
     /**
      * This method is activated when the plugin is loaded.
      */
-    @Override
+    /*@Override
     public void onLoad() {
         
     }
@@ -20,9 +20,9 @@ public class FallenKingdom extends JavaPlugin {
     /**
      * This method is activated when the plugin is enabled.
      */
-    @Override
+    /*@Override
     public void onEnable() {
         System.out.println("The fallen kingdom is ready !");
     }
 
-}
+}*/

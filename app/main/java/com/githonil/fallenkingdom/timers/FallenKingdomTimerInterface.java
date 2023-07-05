@@ -3,7 +3,7 @@ package com.githonil.fallenkingdom.timers;
 /**
  * This interface can be used for communicating with the Fallen Kingdom's timer.
  */
-public interface fallenkingdomTimerInteface {
+public interface FallenKingdomTimerInterface {
 
     /**
      * This method starts the timer.

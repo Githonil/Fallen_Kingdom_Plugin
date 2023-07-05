@@ -19,7 +19,7 @@ public interface ClaimInterface {
     /**
      * This method checks if a player is authorized at the claim.
      * 
-     * @param UUID The player's UUID.
+     * @param player The player's UUID.
      * @return Return true if the player is authorized, else false.
      */
     boolean checkPlayer(UUID player);

@@ -1,6 +1,6 @@
 package com.githonil.fallenkingdom.claims;
 
-import com.githonil.fallenkingdom.teams;
+import com.githonil.fallenkingdom.teams.TeamInterface;
 
 import java.util.UUID;
 import java.util.Objects;
@@ -49,7 +49,7 @@ public class Claim implements ClaimInterface {
      */
     @Override
     public int[] getCoordinate() {
-        return coordinate.copy();
+        return coordinate.clone();
     }
 
 
@@ -57,7 +57,7 @@ public class Claim implements ClaimInterface {
     /**
      * This method checks if a player is authorized at the claim.
      * 
-     * @param UUID The player's UUID.
+     * @param player The player's UUID.
      * @return Return true if the player is authorized, else false.
      */
     @Override
