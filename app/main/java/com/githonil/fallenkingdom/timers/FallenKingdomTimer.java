@@ -53,6 +53,7 @@ public class FallenKingdomTimer extends TimerTask implements FallenkingdomTimerI
         this.days = 0;
         this.timerCore = new Timer();
         this.running = false;
+        this.timerCore.schedule(this, 0, 1000);
     }
 
 
@@ -83,7 +84,6 @@ public class FallenKingdomTimer extends TimerTask implements FallenkingdomTimerI
     @Override
     public void start() {
         running = true;
-        timerCore.schedule(this, 0, 1000);
     }
 
 
