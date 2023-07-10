@@ -1,0 +1,10 @@
+main: com.githonil.fallenkingdom.FallenKingdom
+name: Fallen_Kingdom
+version: 1.0.0
+description: The plugin is for the French game Fallen Kingdom.
+author: Githonil
+commands:
+  createTeam:
+    description: This command create a team.
+    aliases: ct
+    usage: /createTeam <name> <color>
