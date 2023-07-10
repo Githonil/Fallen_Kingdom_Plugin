@@ -18,7 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class FallenKingdom extends JavaPlugin {
 
     /**
-     * This attribute represents a player with his team.
+     * This attribute represents all players with their team.
      */
     private HashMap<UUID, TeamInterface> teammatesMap;
 
@@ -38,9 +38,6 @@ public class FallenKingdom extends JavaPlugin {
     public void onLoad() {
         teammatesMap = new HashMap<>();
         claims = new Set<>();
-
-        getServer().getPluginManager().registerEvents(new BlockBreakListener(claims), this);
-        getServer().getPluginManager().registerEvents(new BlockPlaceListener(claims), this);
     }
 
 
@@ -50,6 +47,11 @@ public class FallenKingdom extends JavaPlugin {
      */
     @Override
     public void onEnable() {
+        getServer().getPluginManager().registerEvents(new BlockBreakListener(claims), this);
+        getServer().getPluginManager().registerEvents(new BlockPlaceListener(claims), this);
+
+        getCommand("createTeam").setExecutor(new CreateTeamCommand(teammatesMap));
+
         System.out.println("The fallen kingdom is ready !");
     }
 
