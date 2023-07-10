@@ -47,7 +47,7 @@ public class BlockBreakListener extends Listener {
         for(ClaimInterface claim : claims) {
             int[] coordinate = claim.getCoordinate();
             if (coordinate[0] == blockBaseChunk.getX() && coordinate[1] == blockBaseChunk.getY() && coordinate[2] == blockBaseChunk.getZ())
-                return true;
+                return claim;
         }
         return null;
     }

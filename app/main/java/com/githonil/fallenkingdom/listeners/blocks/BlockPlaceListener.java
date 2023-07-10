@@ -27,7 +27,7 @@ public class BlockPlaceListener extends Listener {
     /**
      * The listener's constructor.
      * 
-     * @param claims All the claims.
+     * @param claims All the clagims.
      */
     public BlockPlaceListener(Set<ClaimInterface> claims) {
         this.claims = claims;
@@ -47,7 +47,7 @@ public class BlockPlaceListener extends Listener {
         for(ClaimInterface claim : claims) {
             int[] coordinate = claim.getCoordinate();
             if (coordinate[0] == blockBaseChunk.getX() && coordinate[1] == blockBaseChunk.getY() && coordinate[2] == blockBaseChunk.getZ())
-                return true;
+                return claim;
         }
         return null;
     }
