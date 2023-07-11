@@ -52,7 +52,7 @@ public class FallenKingdom extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockBreakListener(claims), this);
         getServer().getPluginManager().registerEvents(new BlockPlaceListener(claims), this);
 
-        getCommand("createTeam").setExecutor(new CreateTeamCommand(teammatesMap));
+        getCommand("createteam").setExecutor(new CreateTeamCommand(teammatesMap));
 
         System.out.println("The fallen kingdom is ready !");
     }
