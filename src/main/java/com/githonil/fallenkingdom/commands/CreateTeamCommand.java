@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
 
 /**
- * This class handles when the command "createTeam" is called.
+ * This class handles when the command "createteam" is called.
  */
 public class CreateTeamCommand implements CommandExecutor {
 
@@ -38,19 +38,25 @@ public class CreateTeamCommand implements CommandExecutor {
 
     /**
      * This method handles when the command "createTeam" is called.
+     * 
+     * @param sender The sender.
+     * @param command The command.
+     * @param label The command's name.
+     * @param args The arguments.
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) return false;
+
+        Player player = (Player) sender;
 
         if (args.length != 2) {
             player.sendMessage(ChatColor.RED + "Error for the command.");
             return false;
         }
 
-        Player player = (Player) sender;
         String name = args[0];
-        String colorString = args[1];
+        String colorString = args[1].toUpperCase();
         ChatColor color;
         try {
             color = ChatColor.valueOf(colorString);
@@ -61,12 +67,13 @@ public class CreateTeamCommand implements CommandExecutor {
         }
         UUID playerUUID = player.getUniqueId();
 
-        Team team = new Team(name, color, playerUUID);
+        Team team = new Team(name, colorString, playerUUID);
         teammatesMap.put(playerUUID, team);
 
         player.setDisplayName(color + name + " | " + player.getName() + ChatColor.WHITE);
+        player.setPlayerListName(color + name + " | " + player.getName() + ChatColor.WHITE);
 
-        player.sendMessage(ChatColor.LIME + "Your team is create.");
+        player.sendMessage(ChatColor.GREEN + "Your team is create.");
         
         return true;
     }

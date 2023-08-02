@@ -8,3 +8,7 @@ commands:
     description: This command create a team.
     aliases: ct
     usage: /createteam <name> <color>
+  destroyteam:
+    description: This command destroy your team.
+    aliases: dt
+    usage: /destroyteam

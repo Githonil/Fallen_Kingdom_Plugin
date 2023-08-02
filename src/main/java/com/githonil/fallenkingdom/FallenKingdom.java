@@ -7,6 +7,7 @@ import com.githonil.fallenkingdom.listeners.blocks.BlockBreakListener;
 import com.githonil.fallenkingdom.listeners.blocks.BlockPlaceListener;
 
 import com.githonil.fallenkingdom.commands.CreateTeamCommand;
+import com.githonil.fallenkingdom.commands.DestroyTeamCommand;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -53,6 +54,7 @@ public class FallenKingdom extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockPlaceListener(claims), this);
 
         getCommand("createteam").setExecutor(new CreateTeamCommand(teammatesMap));
+        getCommand("destroyteam").setExecutor(new DestroyTeamCommand(teammatesMap));
 
         System.out.println("The fallen kingdom is ready !");
     }
