@@ -45,6 +45,7 @@ public class CreateTeamCommand implements CommandExecutor {
      * @param command The command.
      * @param label The command's name.
      * @param args The arguments.
+     * @return Retur true if the command is correctly executed.
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

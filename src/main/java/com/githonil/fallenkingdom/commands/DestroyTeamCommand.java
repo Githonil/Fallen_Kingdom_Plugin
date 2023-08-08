@@ -43,6 +43,7 @@ public class DestroyTeamCommand implements CommandExecutor {
      * @param command The command.
      * @param label The command's name.
      * @param args The arguments.
+     * @return Retur true if the command is correctly executed.
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -63,6 +64,7 @@ public class DestroyTeamCommand implements CommandExecutor {
      * 
      * @param player The player who executed the command.
      * @param args The arguments.
+     * @return Retur true if the command is correctly executed.
      */
     private boolean commandEveryone(Player player, String[] args) {
         UUID playerUUID = player.getUniqueId();
@@ -87,6 +89,7 @@ public class DestroyTeamCommand implements CommandExecutor {
      * 
      * @param player The player who executed the command.
      * @param args The arguments.
+     * @return Retur true if the command is correctly executed.
      */
     private boolean commandOperator(Player player, String[] args) {
         if (!player.hasPermission("fallenkingdom.operator")) {
