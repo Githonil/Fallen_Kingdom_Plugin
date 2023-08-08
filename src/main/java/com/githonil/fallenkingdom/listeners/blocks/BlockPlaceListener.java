@@ -11,6 +11,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.Chunk;
+import org.bukkit.Material;
 
 /**
  * The class handles when a block is placed.
@@ -64,6 +65,9 @@ public class BlockPlaceListener implements Listener {
         Block block = event.getBlockPlaced();
         Player player = event.getPlayer();
         ClaimInterface claim = checkBlock(block);
+
+        if (block.getType().equals(Material.TNT))
+            return;
 
         if (claim == null || !claim.checkPlayer(player.getUniqueId())) {
             event.setCancelled(true);

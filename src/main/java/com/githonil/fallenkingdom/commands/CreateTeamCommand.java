@@ -1,7 +1,7 @@
 package com.githonil.fallenkingdom.commands;
 
 import com.githonil.fallenkingdom.teams.TeamInterface;
-import com.githonil.fallenkingdom.teams.Team;
+import com.githonil.fallenkingdom.teams.TeamMinecraft;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -12,6 +12,8 @@ import org.bukkit.command.Command;
 
 import org.bukkit.entity.Player;
 import org.bukkit.ChatColor;
+import org.bukkit.Bukkit;
+import org.bukkit.scoreboard.Scoreboard;
 
 /**
  * This class handles when the command "createteam" is called.
@@ -46,36 +48,67 @@ public class CreateTeamCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) return false;
+        if (args.length != 2 && !(sender instanceof Player)) return false;
 
         Player player = (Player) sender;
-
-        if (args.length != 2) {
-            player.sendMessage(ChatColor.RED + "Error for the command.");
-            return false;
-        }
-
-        String name = args[0];
-        String colorString = args[1].toUpperCase();
-        ChatColor color;
-        try {
-            color = ChatColor.valueOf(colorString);
-        }
-        catch (Exception exception) {
-            player.sendMessage(ChatColor.RED + "Error for the color.");
-            return false;
-        }
         UUID playerUUID = player.getUniqueId();
+        String name = args[0];
+        String colorName = args[1].toUpperCase();
 
-        Team team = new Team(name, colorString, playerUUID);
+        ChatColor color = this.getColor(colorName);
+        if (!this.check(color, player)) return false;
+
+        //String newPseudo = color + name + " | " + player.getName() + ChatColor.WHITE;
+        //this.changeName(player, newPseudo);
+
+
+        //Team team = new Team(name, colorName, playerUUID);
+        TeamMinecraft team = new TeamMinecraft(name, playerUUID, color);
         teammatesMap.put(playerUUID, team);
 
-        player.setDisplayName(color + name + " | " + player.getName() + ChatColor.WHITE);
-        player.setPlayerListName(color + name + " | " + player.getName() + ChatColor.WHITE);
+        player.sendMessage(ChatColor.GREEN + "Your team is create");
 
-        player.sendMessage(ChatColor.GREEN + "Your team is create.");
-        
         return true;
+    }
+
+
+
+    /**
+     * This method checks the command.
+     * 
+     * @param color The color to check.
+     * @param playerUUID The player to check.
+     * @return Return false if a problem appears.
+     */
+    private boolean check(ChatColor color, Player player) {
+        if (color == null) {
+            player.sendMessage(ChatColor.RED + "This color doesn't exist");
+            return false;
+        }
+
+        if (teammatesMap.get(player.getUniqueId()) != null) {
+            player.sendMessage(ChatColor.RED + "You have already a team");
+            return false;
+        }
+
+        return true;
+    }
+
+
+
+    /**
+     * This method gives a color related to the name.
+     * 
+     * @param colorName The name of the color.
+     * @return Return the color or null if no color related to the name.
+     */
+    private ChatColor getColor(String colorName) {
+        try {
+            return ChatColor.valueOf(colorName);
+        }
+        catch (Exception exception) {
+            return null;
+        }
     }
 
 }

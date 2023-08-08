@@ -55,8 +55,6 @@ public class FallenKingdom extends JavaPlugin {
 
         getCommand("createteam").setExecutor(new CreateTeamCommand(teammatesMap));
         getCommand("destroyteam").setExecutor(new DestroyTeamCommand(teammatesMap));
-
-        System.out.println("The fallen kingdom is ready !");
     }
 
 }

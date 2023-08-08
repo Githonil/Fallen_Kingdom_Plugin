@@ -1,0 +1,15 @@
+#Here the list of blocks you can place outside your base.
+# You see the list of blocks in https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+# Example :
+# blocksListCanPlaceOutside:
+# - REDSTONE_TORCH
+# - FLOWER_POT
+blocksListCanPlaceOutside:
+
+#Here the list of blocks you cannot place inside your base.
+# You see the list of blocks in https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+# Example :
+# blocksListCannotPlaceInside:
+# - OBSIDIAN
+# - LEVER
+blocksListCannotPlaceInside:

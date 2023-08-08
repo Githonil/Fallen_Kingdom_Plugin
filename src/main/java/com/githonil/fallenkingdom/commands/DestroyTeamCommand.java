@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.Command;
 
 import org.bukkit.entity.Player;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 /**
@@ -48,27 +49,93 @@ public class DestroyTeamCommand implements CommandExecutor {
         if (!(sender instanceof Player)) return false;
 
         Player player = (Player) sender;
+
+        if (args.length == 0) return commandEveryone(player, args);
+        else if (args.length == 1) return commandOperator(player, args);
+
+        return false;
+    }
+
+
+
+    /**
+     * This method handles the command "destroyteam" for everyone.
+     * 
+     * @param player The player who executed the command.
+     * @param args The arguments.
+     */
+    private boolean commandEveryone(Player player, String[] args) {
         UUID playerUUID = player.getUniqueId();
         TeamInterface team = teammatesMap.get(playerUUID);
 
-        if (!team.getLeader().equals(playerUUID)) {
+        if (!(team != null && team.getLeader().equals(playerUUID))) {
             player.sendMessage(ChatColor.RED + "You are not a leader");
             return false;
         }
 
-        for (UUID teammate : team) {
-            team.removeTeammate(teammate);
-            teammatesMap.remove(teammate);
-        }
-
-        teammatesMap.remove(playerUUID);
-
-        player.setDisplayName(player.getName());
-        player.setPlayerListName(player.getName());
+        deleteTeam(team);
 
         player.sendMessage(ChatColor.GREEN + "Your team is destroy");
 
         return true;
+    }
+
+
+
+    /**
+     * This method handles the the command "destroyteam" for operator.
+     * 
+     * @param player The player who executed the command.
+     * @param args The arguments.
+     */
+    private boolean commandOperator(Player player, String[] args) {
+        if (!player.hasPermission("fallenkingdom.operator")) {
+            player.sendMessage(ChatColor.RED + "You don't have the permission");
+            return false;
+        };
+
+        String name = args[0];
+        for (TeamInterface team : teammatesMap.values()) {
+            if (team.getName().equals(name)) {
+                deleteTeam(team);
+                player.sendMessage(ChatColor.GREEN + "The team is destroy");
+                return true;
+            }
+        }
+
+        player.sendMessage(ChatColor.RED + "The team doesn't exist");
+        return false;
+    }
+
+
+
+    /**
+     * This method delete a team.
+     * 
+     * @param team The team.
+     */
+    private void deleteTeam(TeamInterface team) {
+        for (UUID teammate : team) {
+            Player playerTmp = Bukkit.getOfflinePlayer(teammate).getPlayer();
+            this.fireTeammate(team, playerTmp);
+        }
+
+        UUID leader = team.getLeader();
+        Player playerLeader = Bukkit.getOfflinePlayer(leader).getPlayer();
+        fireTeammate(team, playerLeader);
+    }
+
+
+
+    /**
+     * This method fires a teammate in his team.
+     * 
+     * @param player The player.
+     */
+    private void fireTeammate(TeamInterface team, Player player) {
+        UUID playerUUID = player.getUniqueId();
+        team.removeTeammate(playerUUID);
+        teammatesMap.remove(playerUUID);
     }
 
 }
