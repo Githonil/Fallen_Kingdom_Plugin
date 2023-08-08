@@ -8,6 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+import org.bukkit.configuration.file.FileConfiguration;
+
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.Chunk;
@@ -26,12 +28,20 @@ public class BlockPlaceListener implements Listener {
 
 
     /**
+     * This attribute represents the plugin's configuration.
+     */
+    private FileConfiguration config;
+
+
+
+    /**
      * The listener's constructor.
      * 
      * @param claims All the clagims.
      */
-    public BlockPlaceListener(HashSet<ClaimInterface> claims) {
+    public BlockPlaceListener(HashSet<ClaimInterface> claims, FileConfiguration config) {
         this.claims = claims;
+        this.config = config;
     }
 
 
@@ -66,10 +76,13 @@ public class BlockPlaceListener implements Listener {
         Player player = event.getPlayer();
         ClaimInterface claim = checkBlock(block);
 
-        if (block.getType().equals(Material.TNT))
+        boolean blocksListCanPlaceOutside = config.getStringList("blocksListCanPlaceOutside").contains(block.getType().toString());
+        boolean blocksListCannotPlaceInside = config.getStringList("blocksListCannotPlaceInside").contains(block.getType().toString());
+
+        if (block.getType().equals(Material.TNT) || blocksListCanPlaceOutside)
             return;
 
-        if (claim == null || !claim.checkPlayer(player.getUniqueId())) {
+        if (claim == null || !claim.checkPlayer(player.getUniqueId()) || blocksListCannotPlaceInside) {
             event.setCancelled(true);
         }
     }

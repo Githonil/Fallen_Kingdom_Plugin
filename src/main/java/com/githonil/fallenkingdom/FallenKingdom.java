@@ -50,11 +50,12 @@ public class FallenKingdom extends JavaPlugin {
      */
     @Override
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(new BlockBreakListener(claims), this);
-        getServer().getPluginManager().registerEvents(new BlockPlaceListener(claims), this);
+        this.saveDefaultConfig();
+        this.getServer().getPluginManager().registerEvents(new BlockBreakListener(claims), this);
+        this.getServer().getPluginManager().registerEvents(new BlockPlaceListener(claims, this.getConfig()), this);
 
-        getCommand("createteam").setExecutor(new CreateTeamCommand(teammatesMap));
-        getCommand("destroyteam").setExecutor(new DestroyTeamCommand(teammatesMap));
+        this.getCommand("createteam").setExecutor(new CreateTeamCommand(teammatesMap));
+        this.getCommand("destroyteam").setExecutor(new DestroyTeamCommand(teammatesMap));
     }
 
 }

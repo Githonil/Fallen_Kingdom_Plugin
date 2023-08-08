@@ -13,3 +13,5 @@ blocksListCanPlaceOutside:
 # - OBSIDIAN
 # - LEVER
 blocksListCannotPlaceInside:
+- OBSIDIAN
+- LEVER
