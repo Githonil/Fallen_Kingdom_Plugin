@@ -8,6 +8,8 @@ import com.githonil.fallenkingdom.listeners.blocks.BlockPlaceListener;
 
 import com.githonil.fallenkingdom.commands.CreateTeamCommand;
 import com.githonil.fallenkingdom.commands.DestroyTeamCommand;
+import com.githonil.fallenkingdom.commands.ClaimCommand;
+import com.githonil.fallenkingdom.commands.UnclaimCommand;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -56,6 +58,8 @@ public class FallenKingdom extends JavaPlugin {
 
         this.getCommand("createteam").setExecutor(new CreateTeamCommand(teammatesMap));
         this.getCommand("destroyteam").setExecutor(new DestroyTeamCommand(teammatesMap));
+        this.getCommand("claim").setExecutor(new ClaimCommand(claims, teammatesMap));
+        this.getCommand("unclaim").setExecutor(new UnclaimCommand(claims, teammatesMap));
     }
 
 }

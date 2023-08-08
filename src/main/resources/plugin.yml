@@ -12,3 +12,9 @@ commands:
     description: This command destroy your team.
     aliases: dt
     usage: /destroyteam
+  claim:
+    description: This command claim a chunk.
+    usage: /claim
+  unclaim:
+    description: This command unclaim a chunk.
+    usage : /unclaim
