@@ -1,4 +1,4 @@
-package com.githonil.fallenkingdom.commands;
+package com.githonil.fallenkingdom.commands.teams;
 
 import com.githonil.fallenkingdom.teams.TeamInterface;
 

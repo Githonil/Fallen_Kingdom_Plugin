@@ -6,10 +6,10 @@ import com.githonil.fallenkingdom.claims.ClaimInterface;
 import com.githonil.fallenkingdom.listeners.blocks.BlockBreakListener;
 import com.githonil.fallenkingdom.listeners.blocks.BlockPlaceListener;
 
-import com.githonil.fallenkingdom.commands.CreateTeamCommand;
-import com.githonil.fallenkingdom.commands.DestroyTeamCommand;
-import com.githonil.fallenkingdom.commands.ClaimCommand;
-import com.githonil.fallenkingdom.commands.UnclaimCommand;
+import com.githonil.fallenkingdom.commands.teams.CreateTeamCommand;
+import com.githonil.fallenkingdom.commands.teams.DestroyTeamCommand;
+import com.githonil.fallenkingdom.commands.claims.ClaimCommand;
+import com.githonil.fallenkingdom.commands.claims.UnclaimCommand;
 
 import java.util.HashMap;
 import java.util.HashSet;

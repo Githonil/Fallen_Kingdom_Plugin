@@ -1,4 +1,4 @@
-package com.githonil.fallenkingdom.commands;
+package com.githonil.fallenkingdom.commands.claims;
 
 import com.githonil.fallenkingdom.claims.ClaimInterface;
 import com.githonil.fallenkingdom.teams.TeamInterface;
