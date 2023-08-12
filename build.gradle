@@ -25,6 +25,12 @@ java {
 	}
 }
 
+tasks.withType(JavaCompile) {
+	configure(options) {
+		options.compilerArgs << '-Xlint' << '-Xlint:-classfile' << '-encoding' << 'utf8' << '-Xdoclint'
+	}
+}
+
 jar {
 	manifest {
 		attributes(
