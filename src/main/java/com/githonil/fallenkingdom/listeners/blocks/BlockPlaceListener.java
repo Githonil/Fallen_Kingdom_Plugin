@@ -38,6 +38,7 @@ public class BlockPlaceListener implements Listener {
      * The listener's constructor.
      * 
      * @param claims All the clagims.
+     * @param config The config.
      */
     public BlockPlaceListener(HashSet<ClaimInterface> claims, FileConfiguration config) {
         this.claims = claims;

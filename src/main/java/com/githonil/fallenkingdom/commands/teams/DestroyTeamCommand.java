@@ -133,6 +133,7 @@ public class DestroyTeamCommand implements CommandExecutor {
     /**
      * This method fires a teammate in his team.
      * 
+     * @param team The team.
      * @param player The player.
      */
     private void fireTeammate(TeamInterface team, Player player) {

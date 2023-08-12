@@ -78,7 +78,7 @@ public class CreateTeamCommand implements CommandExecutor {
      * This method checks the command.
      * 
      * @param color The color to check.
-     * @param playerUUID The player to check.
+     * @param player The player to check.
      * @return Return false if a problem appears.
      */
     private boolean check(ChatColor color, Player player) {

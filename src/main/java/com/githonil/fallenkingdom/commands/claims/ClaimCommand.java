@@ -102,7 +102,7 @@ public class ClaimCommand implements CommandExecutor {
     /**
      * This method claims and reference the chunk.
      * 
-     * @param player The chunk.
+     * @param chunk The chunk.
      * @param team The team who claim the chunk.
      * @return Return true if the chunk is claim, else false.
      */
