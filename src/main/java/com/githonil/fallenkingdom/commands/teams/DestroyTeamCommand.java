@@ -1,8 +1,10 @@
 package com.githonil.fallenkingdom.commands.teams;
 
 import com.githonil.fallenkingdom.teams.TeamInterface;
+import com.githonil.fallenkingdom.claims.ClaimInterface;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 
 import org.bukkit.command.CommandExecutor;
@@ -12,6 +14,7 @@ import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
 
 /**
  * This class handles when the command "detroyteam" is called.
@@ -21,7 +24,14 @@ public class DestroyTeamCommand implements CommandExecutor {
     /**
      * This attribute represents all players with their team.
      */
-    private HashMap<UUID, TeamInterface> teammatesMap;
+    private Map<UUID, TeamInterface> teammatesMap;
+
+
+
+    /**
+     * This attribute represents all the claims.
+     */
+    private Map<Chunk, ClaimInterface> claims;
 
 
 
@@ -29,9 +39,11 @@ public class DestroyTeamCommand implements CommandExecutor {
      * The command's constructor.
      * 
      * @param teammatesMap All players with their team.
+     * @param claims All the claims.
      */
-    public DestroyTeamCommand(HashMap<UUID, TeamInterface> teammatesMap) {
+    public DestroyTeamCommand(Map<UUID, TeamInterface> teammatesMap, Map<Chunk, ClaimInterface> claims) {
         this.teammatesMap = teammatesMap;
+        this.claims = claims;
     }
 
 
@@ -118,12 +130,19 @@ public class DestroyTeamCommand implements CommandExecutor {
      * @param team The team.
      */
     private void deleteTeam(TeamInterface team) {
+        UUID leader = team.getLeader();
+
+        for (Map.Entry<Chunk, ClaimInterface> claimEntry : claims.entrySet()) {
+            if (claimEntry.getValue().checkPlayer(leader)) {
+                claims.remove(claimEntry.getKey());
+            }
+        }
+        
         for (UUID teammate : team) {
             Player playerTmp = Bukkit.getOfflinePlayer(teammate).getPlayer();
             this.fireTeammate(team, playerTmp);
         }
 
-        UUID leader = team.getLeader();
         Player playerLeader = Bukkit.getOfflinePlayer(leader).getPlayer();
         fireTeammate(team, playerLeader);
     }

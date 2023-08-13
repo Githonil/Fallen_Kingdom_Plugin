@@ -6,8 +6,7 @@ import com.githonil.fallenkingdom.claims.Claim;
 import com.githonil.fallenkingdom.teams.TeamInterface;
 
 import java.util.UUID;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Map;
 
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,14 +25,14 @@ public class ClaimCommand implements CommandExecutor {
     /**
      * This attribute represents all the claims.
      */
-    private HashSet<ClaimInterface> claims;
+    private Map<Chunk, ClaimInterface> claims;
 
 
 
     /**
      * This attribute represents all players with their team.
      */
-    private HashMap<UUID, TeamInterface> teammatesMap;
+    private Map<UUID, TeamInterface> teammatesMap;
 
 
 
@@ -43,7 +42,7 @@ public class ClaimCommand implements CommandExecutor {
      * @param claims All the claims.
      * @param teammatesMap All the players with their team.
      */
-    public ClaimCommand(HashSet<ClaimInterface> claims, HashMap<UUID, TeamInterface> teammatesMap) {
+    public ClaimCommand(Map<Chunk, ClaimInterface> claims, Map<UUID, TeamInterface> teammatesMap) {
         this.claims = claims;
         this.teammatesMap = teammatesMap;
     }
@@ -110,7 +109,13 @@ public class ClaimCommand implements CommandExecutor {
         Block block = chunk.getBlock(0, 0, 0);
 
         Claim claim = new Claim(block.getX(), block.getY(), block.getZ(), team);
-        return claims.add(claim);
+        ClaimInterface oldClaim = claims.put(chunk, claim);
+        if (oldClaim != null) {
+            claims.put(chunk, oldClaim);
+            return false;
+        }
+
+        return true;
     }
 
 

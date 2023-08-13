@@ -4,8 +4,7 @@ import com.githonil.fallenkingdom.claims.ClaimInterface;
 import com.githonil.fallenkingdom.teams.TeamInterface;
 
 import java.util.UUID;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Map;
 
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,14 +23,14 @@ public class UnclaimCommand implements CommandExecutor {
     /**
      * This attribute represents all the claims.
      */
-    private HashSet<ClaimInterface> claims;
+    private Map<Chunk, ClaimInterface> claims;
 
 
 
     /**
      * This attribute represents all players with their team.
      */
-    private HashMap<UUID, TeamInterface> teammatesMap;
+    private Map<UUID, TeamInterface> teammatesMap;
 
 
 
@@ -41,7 +40,7 @@ public class UnclaimCommand implements CommandExecutor {
      * @param claims All the claims.
      * @param teammatesMap All the players with their team.
      */
-    public UnclaimCommand(HashSet<ClaimInterface> claims, HashMap<UUID, TeamInterface> teammatesMap) {
+    public UnclaimCommand(Map<Chunk, ClaimInterface> claims, Map<UUID, TeamInterface> teammatesMap) {
         this.claims = claims;
         this.teammatesMap = teammatesMap;
     }
@@ -69,7 +68,7 @@ public class UnclaimCommand implements CommandExecutor {
             return false;
         }
 
-        claims.remove(claim);
+        claims.remove(player.getLocation().getChunk());
 
         player.sendMessage(ChatColor.GREEN + "The chunk is unclaim");
 
@@ -88,7 +87,7 @@ public class UnclaimCommand implements CommandExecutor {
         if (!this.isALeader(player)) return null;
 
         Chunk chunk = player.getLocation().getChunk();
-        ClaimInterface claim = this.isChunkClaim(chunk);
+        ClaimInterface claim = claims.get(chunk);
         
         if (!this.isCanBeUnclaim(claim, player)) return null;
 
@@ -113,26 +112,6 @@ public class UnclaimCommand implements CommandExecutor {
         }
 
         return true;
-    }
-
-
-
-    /**
-     * This method checks if a chunk is claim.
-     * 
-     * @param chunk The chunk.
-     * @return Return the claim if the chunk is claim, else null.
-     */
-    private ClaimInterface isChunkClaim(Chunk chunk) {
-        Block block = chunk.getBlock(0, 0, 0);
-
-        for (ClaimInterface claim : claims) {
-            int[] coordinate = claim.getCoordinate();
-            if (coordinate[0] == block.getX() && coordinate[1] == block.getY() && coordinate[2] == block.getZ())
-                return claim;
-        }
-
-        return null;
     }
 
 

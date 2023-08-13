@@ -3,7 +3,7 @@ package com.githonil.fallenkingdom.commands.teams;
 import com.githonil.fallenkingdom.teams.TeamInterface;
 import com.githonil.fallenkingdom.teams.TeamMinecraft;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.command.CommandExecutor;
@@ -23,7 +23,7 @@ public class CreateTeamCommand implements CommandExecutor {
     /**
      * This attribute represents all players with their team.
      */
-    private HashMap<UUID, TeamInterface> teammatesMap;
+    private Map<UUID, TeamInterface> teammatesMap;
 
 
 
@@ -32,7 +32,7 @@ public class CreateTeamCommand implements CommandExecutor {
      * 
      * @param teammatesMap All players with their team.
      */
-    public CreateTeamCommand(HashMap<UUID, TeamInterface> teammatesMap) {
+    public CreateTeamCommand(Map<UUID, TeamInterface> teammatesMap) {
         this.teammatesMap = teammatesMap;
     }
 

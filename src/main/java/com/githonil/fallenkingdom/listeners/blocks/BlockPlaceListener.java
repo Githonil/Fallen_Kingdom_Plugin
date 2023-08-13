@@ -2,7 +2,7 @@ package com.githonil.fallenkingdom.listeners.blocks;
 
 import com.githonil.fallenkingdom.claims.ClaimInterface;
 
-import java.util.HashSet;
+import java.util.Map;
 
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
@@ -23,7 +23,7 @@ public class BlockPlaceListener implements Listener {
     /**
      * This attribute represents all the claims.
      */
-    private HashSet<ClaimInterface> claims;
+    private Map<Chunk, ClaimInterface> claims;
 
 
 
@@ -40,28 +40,9 @@ public class BlockPlaceListener implements Listener {
      * @param claims All the clagims.
      * @param config The config.
      */
-    public BlockPlaceListener(HashSet<ClaimInterface> claims, FileConfiguration config) {
+    public BlockPlaceListener(Map<Chunk, ClaimInterface> claims, FileConfiguration config) {
         this.claims = claims;
         this.config = config;
-    }
-
-
-
-    /**
-     * This method checks if a block is in the claims list.
-     * 
-     * @param block The block.
-     * @return Return the claim where is the block if the block is in the claims list, else null.
-     */
-    private ClaimInterface checkBlock(Block block) {
-        Chunk chunk = block.getChunk();
-        Block blockBaseChunk = chunk.getBlock(0, 0, 0);
-        for(ClaimInterface claim : claims) {
-            int[] coordinate = claim.getCoordinate();
-            if (coordinate[0] == blockBaseChunk.getX() && coordinate[1] == blockBaseChunk.getY() && coordinate[2] == blockBaseChunk.getZ())
-                return claim;
-        }
-        return null;
     }
 
 
@@ -75,7 +56,7 @@ public class BlockPlaceListener implements Listener {
     public void onBlockPlace(BlockPlaceEvent event) {
         Block block = event.getBlockPlaced();
         Player player = event.getPlayer();
-        ClaimInterface claim = checkBlock(block);
+        ClaimInterface claim = claims.get(block.getChunk());
 
         boolean blocksListCanPlaceOutside = config.getStringList("blocksListCanPlaceOutside").contains(block.getType().toString());
         boolean blocksListCannotPlaceInside = config.getStringList("blocksListCannotPlaceInside").contains(block.getType().toString());
