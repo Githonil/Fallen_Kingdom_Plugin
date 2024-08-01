@@ -3,12 +3,21 @@ package com.githonil.fallenkingdom.timers;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Objects;
+import java.io.Serial;
 
 /**
  * This class represents a Fallen Kingdom's timer.
  */
 public class FallenKingdomTimer extends TimerTask implements FallenKingdomTimerInterface {
     
+    /**
+     * This attribute represents the ID for the serializable.
+     */
+    @Serial
+    private static final long serialVersionUID = 84105109101114L;
+
+
+
     /**
      * This attribute represents the timer's seconds.
      */

@@ -4,11 +4,20 @@ import java.util.HashSet;
 import java.util.UUID;
 import java.util.Objects;
 import java.util.Iterator;
+import java.io.Serial;
 
 /**
  * This class reprensents a team.
  */
 public class Team implements TeamInterface {
+
+    /**
+     * This attribute represents the ID for the serializable.
+     */
+    @Serial
+    private static final long serialVersionUID = 8410197109L;
+
+
 
     /**
      * This attribute represents the team's name.

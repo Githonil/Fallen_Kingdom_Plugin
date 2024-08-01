@@ -38,13 +38,23 @@ public class FallenKingdom extends JavaPlugin {
 
 
     /**
-     * This method is activated when the plugin is loaded.
+     * This is the save class.
      */
-    @Override
-    public void onLoad() {
-        teammatesMap = new HashMap<>();
-        claims = new HashMap<>();
-    }
+    private SaveGame saveGame;
+
+
+
+    /**
+     * The path of teams save.
+     */
+    private final String pathTeams = "./plugins/Fallen_Kingdom/teams.save";
+
+
+
+    /**
+     * The path of claims save.
+     */
+    private final String pathClaims = "./plugins/Fallen_Kingdom/claims.save";
 
 
 
@@ -53,6 +63,12 @@ public class FallenKingdom extends JavaPlugin {
      */
     @Override
     public void onEnable() {
+        saveGame = new SaveGame();
+        teammatesMap = (HashMap<UUID, TeamInterface>) saveGame.loadTeam(pathTeams);
+        claims = (HashMap<Chunk, ClaimInterface>) saveGame.loadClaims(pathClaims);
+
+        System.out.println(teammatesMap);
+
         this.saveDefaultConfig();
 
         this.getServer().getPluginManager().registerEvents(new BlockBreakListener(claims), this);
@@ -63,6 +79,16 @@ public class FallenKingdom extends JavaPlugin {
         this.getCommand("destroyteam").setExecutor(new DestroyTeamCommand(teammatesMap, claims));
         this.getCommand("claim").setExecutor(new ClaimCommand(claims, teammatesMap));
         this.getCommand("unclaim").setExecutor(new UnclaimCommand(claims, teammatesMap));
+    }
+
+
+
+    /**
+     * This method is activated when the plugin is disabled.
+     */
+    @Override
+    public void onDisable() {
+        saveGame.save(teammatesMap, claims, pathTeams, pathClaims);
     }
 
 }

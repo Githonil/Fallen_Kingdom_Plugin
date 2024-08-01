@@ -4,12 +4,21 @@ import com.githonil.fallenkingdom.teams.TeamInterface;
 
 import java.util.UUID;
 import java.util.Objects;
+import java.io.Serial;
 
 /**
  * This class represents a claim.
  */
 public class Claim implements ClaimInterface {
+
+    /**
+     * This attribute represents the ID for the serializable.
+     */
+    @Serial
+    private static final long serialVersionUID = 6797105109L;
     
+
+
     /**
      * This attribute represents who is authorized.
      */

@@ -1,11 +1,12 @@
 package com.githonil.fallenkingdom.teams;
 
 import java.util.UUID;
+import java.io.Serializable;
 
 /**
  * This interface can be used for communicating with a team.
  */
-public interface TeamInterface extends Iterable<UUID> {
+public interface TeamInterface extends Iterable<UUID>, Serializable {
 
     /**
      * This method returns the team's name.

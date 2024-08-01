@@ -4,7 +4,6 @@ import com.githonil.fallenkingdom.teams.TeamInterface;
 import com.githonil.fallenkingdom.claims.ClaimInterface;
 
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 
 import org.bukkit.command.CommandExecutor;

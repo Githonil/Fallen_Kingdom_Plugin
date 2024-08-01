@@ -1,6 +1,7 @@
 package com.githonil.fallenkingdom.teams;
 
 import java.util.UUID;
+import java.io.Serial;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,16 +14,24 @@ import org.bukkit.entity.Player;
 public class TeamMinecraft extends Team {
 
     /**
+     * This attribute represents the ID for the serializable.
+     */
+    @Serial
+    private static final long serialVersionUID = 77105110101L;
+
+
+
+    /**
      * This attribute represents the team in Minecraft.
      */
-    private org.bukkit.scoreboard.Team team;
+    private transient org.bukkit.scoreboard.Team team;
 
 
 
     /**
      * This attribute represents the team's color.
      */
-    private ChatColor color;
+    private transient ChatColor color;
 
 
 
@@ -39,8 +48,6 @@ public class TeamMinecraft extends Team {
         this.team.setColor(color);
         this.team.setPrefix(color + this.getName() + " | ");
         this.color = color;
-        Player player = Bukkit.getOfflinePlayer(super.getLeader()).getPlayer();
-        player.setDisplayName(color + super.getName() + " | " + player.getName() + ChatColor.RESET);
     }
 
 
@@ -60,7 +67,6 @@ public class TeamMinecraft extends Team {
         Player player = Bukkit.getOfflinePlayer(teammate).getPlayer();
 
         team.addEntry(player.getName());
-        player.setDisplayName(color + super.getName() + " | " + player.getName() + ChatColor.RESET);
     }
 
 
@@ -79,7 +85,6 @@ public class TeamMinecraft extends Team {
         Player player = Bukkit.getOfflinePlayer(teammate).getPlayer();
 
         team.removeEntry(player.getName());
-        player.setDisplayName(player.getName());
 
         if (team.getSize() <= 0) {
             team.unregister();

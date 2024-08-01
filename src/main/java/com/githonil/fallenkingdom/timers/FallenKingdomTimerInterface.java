@@ -1,9 +1,11 @@
 package com.githonil.fallenkingdom.timers;
 
+import java.io.Serializable;
+
 /**
  * This interface can be used for communicating with the Fallen Kingdom's timer.
  */
-public interface FallenKingdomTimerInterface {
+public interface FallenKingdomTimerInterface extends Serializable {
 
     /**
      * This method starts the timer.

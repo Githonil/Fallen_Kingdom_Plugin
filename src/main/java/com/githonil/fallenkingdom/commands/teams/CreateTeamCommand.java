@@ -49,7 +49,7 @@ public class CreateTeamCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args.length != 2 && !(sender instanceof Player)) return false;
+        if (args.length != 2 || !(sender instanceof Player)) return false;
 
         Player player = (Player) sender;
         UUID playerUUID = player.getUniqueId();
