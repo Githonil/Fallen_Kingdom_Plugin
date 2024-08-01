@@ -14,6 +14,13 @@ import org.bukkit.entity.Player;
 public class TeamMinecraft extends Team {
 
     /**
+     * The scoreboard for the teams.
+     */
+    public static Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+
+
+
+    /**
      * This attribute represents the ID for the serializable.
      */
     @Serial
@@ -62,7 +69,7 @@ public class TeamMinecraft extends Team {
         super.addTeammate(teammate);
 
         if (team == null)
-            this.team = Bukkit.getScoreboardManager().getMainScoreboard().registerNewTeam(super.getName());
+            this.team = scoreboard.registerNewTeam(super.getName());
 
         Player player = Bukkit.getOfflinePlayer(teammate).getPlayer();
 
