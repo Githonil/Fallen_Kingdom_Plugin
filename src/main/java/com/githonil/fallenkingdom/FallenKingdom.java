@@ -7,6 +7,7 @@ import com.githonil.fallenkingdom.listeners.blocks.BlockBreakListener;
 import com.githonil.fallenkingdom.listeners.blocks.BlockPlaceListener;
 import com.githonil.fallenkingdom.listeners.moves.PlayerMoveListener;
 import com.githonil.fallenkingdom.listeners.connections.PlayerJoinListener;
+import com.githonil.fallenkingdom.listeners.chats.PlayerChatListener;
 
 import com.githonil.fallenkingdom.commands.teams.CreateTeamCommand;
 import com.githonil.fallenkingdom.commands.teams.DestroyTeamCommand;
@@ -75,7 +76,8 @@ public class FallenKingdom extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new BlockBreakListener(claims), this);
         this.getServer().getPluginManager().registerEvents(new BlockPlaceListener(claims, this.getConfig()), this);
         this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(claims), this);
-        this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(teammatesMap), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerChatListener(), this);
 
         this.getCommand("createteam").setExecutor(new CreateTeamCommand(teammatesMap));
         this.getCommand("destroyteam").setExecutor(new DestroyTeamCommand(teammatesMap, claims));

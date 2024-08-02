@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.entity.Player;
+import org.bukkit.OfflinePlayer;
 
 /**
  * This class represent a team for the game Minecraft.
@@ -43,6 +44,13 @@ public class TeamMinecraft extends Team {
 
 
     /**
+     * This attribute represent the format color. Useful for the saveGame.
+     */
+    private String colorString;
+
+
+
+    /**
      * The team's constructor.
      * 
      * 
@@ -52,8 +60,11 @@ public class TeamMinecraft extends Team {
      */
     public TeamMinecraft(String name, UUID leader, ChatColor color) {
         super(name, leader);
+        colorString = color.name();
         this.team.setColor(color);
         this.team.setPrefix(color + this.getName() + " | ");
+        Player player = Bukkit.getOfflinePlayer(leader).getPlayer();
+        player.setDisplayName(color + super.getName() + " | " + player.getName() + ChatColor.RESET);
         this.color = color;
     }
 
@@ -72,6 +83,8 @@ public class TeamMinecraft extends Team {
             this.team = scoreboard.registerNewTeam(super.getName());
 
         Player player = Bukkit.getOfflinePlayer(teammate).getPlayer();
+        player.setScoreboard(scoreboard);
+        player.setDisplayName(color + super.getName() + " | " + player.getName() + ChatColor.RESET);
 
         team.addEntry(player.getName());
     }
@@ -90,12 +103,57 @@ public class TeamMinecraft extends Team {
         super.removeTeammate(teammate);
 
         Player player = Bukkit.getOfflinePlayer(teammate).getPlayer();
+        player.setDisplayName(player.getName());
 
         team.removeEntry(player.getName());
 
         if (team.getSize() <= 0) {
             team.unregister();
             team = null;
+        }
+    }
+
+
+
+    /**
+     * This method return the color of the team.
+     * 
+     * @return Return the color of the team.
+     */
+    public String getColor() {
+        return colorString;
+    }
+
+
+
+    /**
+     * This method reload a teammate if attribut is transient.
+     * 
+     * @param teammate The teammate to reload.
+     */
+    public void reloaderTeammate(UUID teammate) {
+        OfflinePlayer player = Bukkit.getOfflinePlayer(teammate);
+        
+        if (player.isOnline())
+            player.getPlayer().setDisplayName(color + super.getName() + " | " + player.getName() + ChatColor.RESET);
+        
+        team.addEntry(player.getName());
+    }
+
+
+
+    /**
+     * This method reload the team if attribut is transient.
+     */
+    @Override
+    public void reloaderTeam() {
+        this.team = scoreboard.registerNewTeam(super.getName());
+        color = ChatColor.valueOf(this.colorString);
+        this.team.setColor(color);
+        this.team.setPrefix(color + super.getName() + " | ");
+
+        for (UUID playerUUID : this) {
+            reloaderTeammate(playerUUID);
         }
     }
 

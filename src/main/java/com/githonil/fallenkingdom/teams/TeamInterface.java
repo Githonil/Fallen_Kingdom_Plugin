@@ -52,4 +52,20 @@ public interface TeamInterface extends Iterable<UUID>, Serializable {
      */
     boolean containTeammate(UUID teammate);
 
+
+
+    /**
+     * This method reload the team if attribut is transient.
+     */
+    void reloaderTeam();
+
+
+
+    /**
+     * This method reload a teammate if attribut is transient.
+     * 
+     * @param teammate The teammate to reload.
+     */
+    void reloaderTeammate(UUID teammate);
+
 }

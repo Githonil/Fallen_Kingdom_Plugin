@@ -197,6 +197,7 @@ public class SaveGame {
 		for(Map.Entry<?, ?> entry : map.entrySet()) {
 			if (!(entry.getKey() instanceof UUID) || !(entry.getValue() instanceof TeamInterface)) return null;
             
+            ( (TeamInterface) entry.getValue() ).reloaderTeam();
             result.put((UUID) entry.getKey(), (TeamInterface) entry.getValue());
             System.out.println(result);
         }

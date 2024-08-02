@@ -128,6 +128,22 @@ public class Team implements TeamInterface {
 
 
     /**
+     * This method reload the team if attribut is transient.
+     */
+    public void reloaderTeam() {}
+
+
+
+    /**
+     * This method reload a teammate if attribut is transient.
+     * 
+     * @param teammate The teammate to reload.
+     */
+    public void reloaderTeammate(UUID teammate) {}
+
+
+
+    /**
      * This method converts the team to string.
      * 
      * @return Return the team converts to string.
