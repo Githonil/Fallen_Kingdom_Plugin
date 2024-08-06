@@ -69,8 +69,6 @@ public class FallenKingdom extends JavaPlugin {
         teammatesMap = (HashMap<UUID, TeamInterface>) saveGame.loadTeam(pathTeams);
         claims = (HashMap<Chunk, ClaimInterface>) saveGame.loadClaims(pathClaims);
 
-        System.out.println(teammatesMap);
-
         this.saveDefaultConfig();
 
         this.getServer().getPluginManager().registerEvents(new BlockBreakListener(claims), this);
