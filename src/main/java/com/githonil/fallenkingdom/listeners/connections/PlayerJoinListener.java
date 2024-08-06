@@ -1,7 +1,6 @@
 package com.githonil.fallenkingdom.listeners.connections;
 
 import com.githonil.fallenkingdom.teams.TeamInterface;
-import com.githonil.fallenkingdom.teams.TeamMinecraft;
 
 import java.util.Map;
 import java.util.UUID;
@@ -44,7 +43,6 @@ public class PlayerJoinListener implements Listener {
         Player player = event.getPlayer();
         UUID playerUUID = player.getUniqueId();
 
-        player.setScoreboard(TeamMinecraft.scoreboard);
         teammatesMap.get(playerUUID).reloaderTeammate(playerUUID);
     }
 

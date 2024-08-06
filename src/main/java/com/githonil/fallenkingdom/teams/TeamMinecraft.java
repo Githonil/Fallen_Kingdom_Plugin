@@ -134,9 +134,11 @@ public class TeamMinecraft extends Team {
     public void reloaderTeammate(UUID teammate) {
         OfflinePlayer player = Bukkit.getOfflinePlayer(teammate);
         
-        if (player.isOnline())
+        if (player.isOnline()) {
+            player.getPlayer().setScoreboard(scoreboard);
             player.getPlayer().setDisplayName(color + super.getName() + " | " + player.getName() + ChatColor.RESET);
-        
+        }
+
         team.addEntry(player.getName());
     }
 
