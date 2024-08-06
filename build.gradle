@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT'
+	implementation 'org.spigotmc:spigot-api:1.21-R0.1-SNAPSHOT'
 	implementation 'org.bukkit:bukkit:1.15.2-R0.1-SNAPSHOT'
 }
 
